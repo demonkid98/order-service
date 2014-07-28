@@ -40,4 +40,13 @@ public class BaseError {
         errors.put(attr, messages);
     }
 
+    public String getFirst() {
+        for (Map.Entry<String, ArrayList<String>> entry : errors.entrySet()) {
+            if (entry.getValue().size() > 0) {
+                return entry.getValue().get(0);
+            }
+        }
+        return null;
+    }
+
 }

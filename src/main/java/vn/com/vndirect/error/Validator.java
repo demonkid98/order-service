@@ -12,4 +12,8 @@ public abstract class Validator {
         return errors.get(attr);
     }
 
+    public String getFirstError() {
+        return errors.getFirst();
+    }
+
 }

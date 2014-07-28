@@ -48,4 +48,12 @@ public class BaseErrorTest {
         assertEquals(second, messages.get(1));
     }
 
+    @Test
+    public void testGetFirstError() {
+        String first = "first error";
+        error.add(testKey, first);
+        error.add(testKey, "second error");
+        assertEquals(first, error.getFirst());
+    }
+
 }
