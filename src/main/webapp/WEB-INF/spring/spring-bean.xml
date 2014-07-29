@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="mockOrderSender" class="vn.com.vndirect.order.MockOrderServiceSender" />
+    <bean id="mockStockService" class="vn.com.vndirect.stock.MockStockInfoService" />
+
+    <bean id="orderService" class="vn.com.vndirect.webservice.OrderService">
+        <property name="serviceSender" ref="mockOrderSender" />
+        <property name="stockService" ref="mockStockService" />
+    </bean>
+
+    <bean id="serviceBeforeMethod" class="vn.com.vndirect.aop.ServiceBeforeMethod" />
+    <bean id="orderServiceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="orderService" />
+        <property name="interceptorNames">
+            <list>
+                <value>serviceBeforeMethod</value>
+            </list>
+        </property>
+    </bean>
+</beans>

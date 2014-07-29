@@ -9,8 +9,10 @@
         <servlet-name>jersey-serlvet</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
-            <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>vn.com.vndirect.webservice</param-value>
+<!--             <param-name>jersey.config.server.provider.packages</param-name> -->
+<!--             <param-value>vn.com.vndirect.webservice</param-value> -->
+            <param-name>javax.ws.rs.Application</param-name>
+            <param-value>vn.com.vndirect.app.Application</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -19,4 +21,13 @@
         <servlet-name>jersey-serlvet</servlet-name>
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>WEB-INF/spring/app-context.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 </web-app>

@@ -18,13 +18,10 @@ public class OrderValidator extends Validator {
     private Order order;
     private StockInfoService stockService;
 
-    public OrderValidator(Order order) {
+    public OrderValidator(Order order, StockInfoService stockService) {
         this.order = order;
+        this.stockService =  stockService;
         this.errors = new BaseError();
-    }
-
-    public void setStockService(StockInfoService stockService) {
-        this.stockService = stockService;
     }
 
     @Override

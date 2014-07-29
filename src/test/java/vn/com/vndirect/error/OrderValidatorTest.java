@@ -17,8 +17,7 @@ public class OrderValidatorTest {
     @Before
     public void setUp() {
         order = new Order();
-        validator = new OrderValidator(order);
-        validator.setStockService(new MockStockInfoService());
+        validator = new OrderValidator(order, new MockStockInfoService());
     }
 
     @Test
@@ -90,7 +89,7 @@ public class OrderValidatorTest {
     }
 
     @Test
-    public void testValidateOrderPriceShouldPassIfLowerThanFloorPrice() {
+    public void testValidateOrderPriceShouldFailIfLowerThanFloorPrice() {
         order.setSymbol("VND");
         order.setPrice(5);
         assertFalse(validator.validatePrice());
@@ -98,7 +97,7 @@ public class OrderValidatorTest {
     }
 
     @Test
-    public void testValidateOrderPriceShouldPassIfHigherThanCeilingPrice() {
+    public void testValidateOrderPriceShouldFailIfHigherThanCeilingPrice() {
         order.setSymbol("ISS");
         order.setPrice(18);
         assertFalse(validator.validatePrice());
@@ -112,14 +111,14 @@ public class OrderValidatorTest {
     }
 
     @Test
-    public void testValidateOrderQuantityShouldPassIfZero() {
+    public void testValidateOrderQuantityShouldFailIfZero() {
         order.setQuantity(0);
         assertFalse(validator.validateQuantity());
         assertEquals(OrderValidator.QUANTITY_NOT_POSITIVE_MSG, validator.getError("quantity").get(0));
     }
 
     @Test
-    public void testValidateOrderQuantityShouldPassIfNegative() {
+    public void testValidateOrderQuantityShouldFailIfNegative() {
         order.setQuantity(-8);
         assertFalse(validator.validateQuantity());
         assertEquals(OrderValidator.QUANTITY_NOT_POSITIVE_MSG, validator.getError("quantity").get(0));
@@ -132,7 +131,7 @@ public class OrderValidatorTest {
     }
 
     @Test
-    public void testValidateOrderTypeShouldPassIfInvalid() {
+    public void testValidateOrderTypeShouldFailIfInvalid() {
         order.setOrderType("AAA");
         assertFalse(validator.validateOrderType());
         assertEquals(OrderValidator.ORDER_TYPE_INVALID_MSG, validator.getError("orderType").get(0));

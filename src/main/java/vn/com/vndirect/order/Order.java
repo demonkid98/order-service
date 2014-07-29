@@ -2,11 +2,32 @@ package vn.com.vndirect.order;
 
 public class Order {
 
+    private String id;
     private String account;
     private String symbol;
     private float price;
     private int quantity;
     private String orderType;
+
+    public Order() {
+    }
+
+    public Order(String id, String account, String symbol, float price, int quantity, String orderType) {
+        this.id = id;
+        this.account = account;
+        this.symbol = symbol;
+        this.price = price;
+        this.quantity = quantity;
+        this.orderType = orderType;
+    }
+
+    public Order(String account, String symbol, float price, int quantity, String orderType) {
+        this("", account, symbol, price, quantity, orderType);
+    }
+
+    public String getId() {
+        return id;
+    }
 
     public String getAccount() {
         return account;
@@ -46,6 +67,11 @@ public class Order {
 
     public void setOrderType(String orderType) {
         this.orderType = orderType;
+    }
+
+    public String toString() {
+        return String.format("Order[account=%s, symbol=%s, price=%2f, quantity=%d, type=%s]",
+                account, symbol, price, quantity, orderType);
     }
 
 }
