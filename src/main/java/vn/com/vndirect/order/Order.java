@@ -74,8 +74,11 @@ public class Order {
     }
 
     public String toString() {
-        return String.format("Order[account=%s, symbol=%s, price=%2f, quantity=%d, type=%s]", account, symbol, price,
-                quantity, orderType);
+        return String.format("Order[id=%s, account=%s, symbol=%s, price=%2f, quantity=%d, type=%s]",
+                id, account, symbol, price, quantity, orderType);
     }
 
+    public double getValue() {
+        return price * quantity;
+    }
 }

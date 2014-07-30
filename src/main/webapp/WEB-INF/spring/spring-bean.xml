@@ -22,4 +22,11 @@
         <property name="stockService" ref="mockStockService" />
         <property name="appState" ref="appState" />
     </bean>
+
+    <bean id="statisticsServiceResource" class="vn.com.vndirect.rest.resource.StatisticsServiceResource">
+        <property name="template" ref="redisTemplate" />
+        <property name="redisOrderKeyName" value="${redis.key.order}" />
+        <property name="redisAccKeyName" value="${redis.key.acc}" />
+        <property name="maxKeep" value="${statistics.maxKeep}" />
+    </bean>
 </beans>

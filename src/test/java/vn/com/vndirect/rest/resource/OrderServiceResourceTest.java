@@ -18,7 +18,7 @@ import vn.com.vndirect.rest.resource.OrderServiceResource;
 
 public class OrderServiceResourceTest {
 
-    ApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring-test/spring-bean.xml");
+    private ApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring-test/spring-bean.xml");
     private OrderServiceResource resource;
     private OrderServiceResource inactiveResource;
 

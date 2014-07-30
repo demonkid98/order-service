@@ -5,6 +5,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.ContextLoader;
 
 import vn.com.vndirect.rest.webservice.OrderService;
+import vn.com.vndirect.rest.webservice.StatisticsService;
 import vn.com.vndirect.zk.OrderServiceApplicationListener;
 
 public class Application extends ResourceConfig {
@@ -19,6 +20,7 @@ public class Application extends ResourceConfig {
         zkApp.start();
 
         register(OrderService.class);
+        register(StatisticsService.class);
     }
 
 }

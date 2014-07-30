@@ -12,12 +12,16 @@ import javax.ws.rs.core.Response;
 
 import vn.com.vndirect.order.Order;
 import vn.com.vndirect.rest.resource.OrderServiceResource;
+import vn.com.vndirect.rest.resource.StatisticsServiceResource;
 
 @Path("/order")
 public class OrderService {
 
     @Inject
     private OrderServiceResource resource;
+
+    @Inject
+    private StatisticsServiceResource statResource;
 
     @POST
     @Path("/placeOrder")
@@ -27,6 +31,7 @@ public class OrderService {
         Order order;
         try {
             order = resource.placeOrder(account, symbol, price, volume, type);
+            statResource.registerOrder(order);
         } catch (NotFoundException e) {
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         } catch (NotAcceptableException e) {
