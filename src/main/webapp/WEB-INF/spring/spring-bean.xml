@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
     <bean id="mockOrderSender" class="vn.com.vndirect.order.MockOrderServiceSender" />
     <bean id="mockStockService" class="vn.com.vndirect.stock.MockStockInfoService" />
 
-    <bean id="orderService" class="vn.com.vndirect.webservice.OrderService">
-        <property name="serviceSender" ref="mockOrderSender" />
-        <property name="stockService" ref="mockStockService" />
+    <bean id="appState" class="vn.com.vndirect.app.ApplicationState" />
+
+    <bean id="orderServiceApplicationListener" class="vn.com.vndirect.zk.OrderServiceApplicationListener">
+        <property name="appState" ref="appState" />
     </bean>
 
-    <bean id="serviceBeforeMethod" class="vn.com.vndirect.aop.ServiceBeforeMethod" />
-    <bean id="orderServiceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
-        <property name="target" ref="orderService" />
-        <property name="interceptorNames">
-            <list>
-                <value>serviceBeforeMethod</value>
-            </list>
-        </property>
+    <bean id="orderServiceResource" class="vn.com.vndirect.rest.resource.OrderServiceResource">
+        <property name="serviceSender" ref="mockOrderSender" />
+        <property name="stockService" ref="mockStockService" />
+        <property name="appState" ref="appState" />
     </bean>
 </beans>

@@ -1,17 +1,23 @@
 package vn.com.vndirect.app;
 
 import org.glassfish.jersey.server.ResourceConfig;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.ContextLoader;
 
-import vn.com.vndirect.webservice.OrderService;
+import vn.com.vndirect.rest.webservice.OrderService;
+import vn.com.vndirect.zk.OrderServiceApplicationListener;
 
 public class Application extends ResourceConfig {
 
     public Application() {
-//        org.zk.Application zkApp = new org.zk.Application();
-//        zkApp.registListener(new OrderSerivceApplicationListener());
-//        zkApp.start();
+        ApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
+        OrderServiceApplicationListener listener = context.getBean(
+                "orderServiceApplicationListener", OrderServiceApplicationListener.class);
 
-        register(new ApplicationBinder());
+        org.zk.Application zkApp = new org.zk.Application();
+        zkApp.registListener(listener);
+        zkApp.start();
+
         register(OrderService.class);
     }
 

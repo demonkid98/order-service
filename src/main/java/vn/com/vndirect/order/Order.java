@@ -29,6 +29,10 @@ public class Order {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getAccount() {
         return account;
     }
@@ -70,8 +74,8 @@ public class Order {
     }
 
     public String toString() {
-        return String.format("Order[account=%s, symbol=%s, price=%2f, quantity=%d, type=%s]",
-                account, symbol, price, quantity, orderType);
+        return String.format("Order[account=%s, symbol=%s, price=%2f, quantity=%d, type=%s]", account, symbol, price,
+                quantity, orderType);
     }
 
 }
