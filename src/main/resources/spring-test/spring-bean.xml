@@ -30,6 +30,13 @@
         <property name="appState" ref="inactiveAppState" />
     </bean>
 
+    <bean id="statisticsServiceResource" class="vn.com.vndirect.rest.resource.StatisticsServiceResource">
+        <property name="template" ref="redisTemplate" />
+        <property name="redisOrderKeyName" value="${redis.key.order}" />
+        <property name="redisAccKeyName" value="${redis.key.acc}" />
+        <property name="maxKeep" value="${statistics.maxKeep}" />
+        <property name="appState" ref="appState" />
+    </bean>
 <!--     <bean id="serviceBeforeMethod" class="vn.com.vndirect.aop.ServiceBeforeMethod" /> -->
 <!--     <bean id="orderServiceProxy" class="org.springframework.aop.framework.ProxyFactoryBean"> -->
 <!--         <property name="target" ref="orderService" /> -->

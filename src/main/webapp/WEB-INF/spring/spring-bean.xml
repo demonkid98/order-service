@@ -28,5 +28,6 @@
         <property name="redisOrderKeyName" value="${redis.key.order}" />
         <property name="redisAccKeyName" value="${redis.key.acc}" />
         <property name="maxKeep" value="${statistics.maxKeep}" />
+        <property name="appState" ref="appState" />
     </bean>
 </beans>

@@ -1,15 +1,18 @@
 package vn.com.vndirect.order;
 
+import java.util.Random;
+
 import org.apache.log4j.Logger;
 
 public class MockOrderServiceSender implements OrderServiceSender {
 
     private static final Logger logger = Logger.getLogger(MockOrderServiceSender.class);
+    private Random random = new Random();
 
     @Override
     public String placeOrder(Order order) {
         logger.info("Send place order request: " + order);
-        return "12345678";
+        return String.format("%09d", random.nextInt(Integer.MAX_VALUE));
     }
 
     @Override

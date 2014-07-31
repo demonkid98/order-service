@@ -21,5 +21,12 @@ public class StatisticsService {
     public Response topOrders() {
         return Response.status(Response.Status.OK).entity(resource.getTopOrders()).build();
     }
-    
+
+    @GET
+    @Path("/topAccounts")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response topAccounts() {
+        return Response.status(Response.Status.OK).entity(resource.getTopAccounts()).build();
+    }
+
 }

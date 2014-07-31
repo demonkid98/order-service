@@ -5,14 +5,13 @@ import javax.ws.rs.NotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import vn.com.vndirect.app.ApplicationState;
 import vn.com.vndirect.error.OrderValidator;
 import vn.com.vndirect.error.Validator;
 import vn.com.vndirect.order.Order;
 import vn.com.vndirect.order.OrderServiceSender;
 import vn.com.vndirect.stock.StockInfoService;
 
-public class OrderServiceResource {
+public class OrderServiceResource extends ServiceResource {
 
     @Autowired
     private OrderServiceSender serviceSender;
@@ -20,12 +19,9 @@ public class OrderServiceResource {
     @Autowired
     private StockInfoService stockService;
 
-    @Autowired
-    private ApplicationState appState;
-
     public Order placeOrder(String account, String symbol, float price, int volume, String type)
             throws NotFoundException, NotAcceptableException {
-        if (! appState.isActive()) {
+        if (! getAppState().isActive()) {
             throw new NotFoundException();
         }
 
@@ -42,7 +38,7 @@ public class OrderServiceResource {
 
     public String replaceOrder(String orderId, String account, String symbol, float price, int volume, String type)
             throws NotFoundException, NotAcceptableException {
-        if (! appState.isActive()) {
+        if (! getAppState().isActive()) {
             throw new NotFoundException();
         }
 
@@ -58,7 +54,7 @@ public class OrderServiceResource {
 
     public String cancelOrder(String orderId, String account, String symbol, float price, int volume, String type)
             throws NotFoundException {
-        if (! appState.isActive()) {
+        if (! getAppState().isActive()) {
             throw new NotFoundException();
         }
 
@@ -73,10 +69,6 @@ public class OrderServiceResource {
 
     public void setStockService(StockInfoService stockService) {
         this.stockService = stockService;
-    }
-
-    public void setAppState(ApplicationState appState) {
-        this.appState = appState;
     }
 
 }

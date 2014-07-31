@@ -8,11 +8,4 @@
         p:host-name="${redis.host}" p:port="${redis.port}" />
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
         p:connection-factory-ref="jedisConnectionFactory"/>
-
-    <bean id="statisticsServiceResource" class="vn.com.vndirect.rest.resource.StatisticsServiceResource">
-        <property name="template" ref="redisTemplate" /> 
-        <property name="redisOrderKeyName" value="${redis.key.order}" />
-        <property name="redisAccKeyName" value="${redis.key.acc}" />
-        <property name="maxKeep" value="${statistics.maxKeep}" />
-    </bean>
 </beans>

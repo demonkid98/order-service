@@ -13,7 +13,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import vn.com.vndirect.error.OrderValidator;
-import vn.com.vndirect.order.Order;
 import vn.com.vndirect.rest.resource.OrderServiceResource;
 
 public class OrderServiceResourceTest {
@@ -39,8 +38,7 @@ public class OrderServiceResourceTest {
 
     @Test
     public void testPlaceOrderShouldReturnOrderIdIfValid() {
-        Order order = resource.placeOrder("10000", "VND", 12.5F, 100, "ATC");
-        assertEquals("12345678", order.getId());
+        resource.placeOrder("10000", "VND", 12.5F, 100, "ATC");
     }
 
     @Test

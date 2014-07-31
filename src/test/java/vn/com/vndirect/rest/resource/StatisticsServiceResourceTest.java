@@ -2,6 +2,8 @@ package vn.com.vndirect.rest.resource;
 
 import static org.junit.Assert.*;
 
+import java.util.Random;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -76,8 +78,10 @@ public class StatisticsServiceResourceTest {
     }
 
     private void prepareDataSet(int size, double score) {
+        Random random = new Random();
+        int seed = random.nextInt(Integer.MAX_VALUE - size);
         for (int i = 0; i < size; i++) {
-            zSetOps.add(redisOrderKeyName, String.format("%05d", i), score + i);
+            zSetOps.add(redisOrderKeyName, String.format("%05d", i + seed), score + i);
         }
     }
 }
