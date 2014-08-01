@@ -1,0 +1,68 @@
+<form action="http://localhost:8080/orderservice/api/order/placeOrder" method="POST">
+  <legend>Place order</legend>
+  <p>
+    <label for="account">Account</label>
+    <input type="text" id="account" name="account" value="12345678" />
+  </p>
+  <p>
+    <label for="symbol">Symbol</label>
+    <input type="text" id="symbol" name="symbol" value="VND" />
+  </p>
+  <p>
+    <label for="price">Price</label>
+    <input type="text" id="price" name="price" value="12.5" />
+  </p>
+  <p>
+    <label for="quantity">Quantity</label>
+    <input type="quantity" id="quantity" name="volume" value="100" />
+  </p>
+  <p>
+    <label for="type">Type</label>
+    <input type="text" id="type" name="type" value="LO" />
+  </p>
+  <p>
+    <input type="submit" value="Submit" />
+  </p>
+</form>
+
+<form action="http://localhost:8080/orderservice/api/order/replaceOrder" method="POST">
+  <legend>Replace order</legend>
+  <p>
+    <label for="id">Id</label>
+    <input type="text" id="id" name="orderId" value="1" />
+  </p>
+  <p>
+    <label for="account">Account</label>
+    <input type="text" id="account" name="account" value="12345678" />
+  </p>
+  <p>
+    <label for="symbol">Symbol</label>
+    <input type="text" id="symbol" name="symbol" value="VND" />
+  </p>
+  <p>
+    <label for="price">Price</label>
+    <input type="text" id="price" name="price" value="12.5" />
+  </p>
+  <p>
+    <label for="quantity">Quantity</label>
+    <input type="quantity" id="quantity" name="volume" value="100" />
+  </p>
+  <p>
+    <label for="type">Type</label>
+    <input type="text" id="type" name="type" value="LO" />
+  </p>
+  <p>
+    <input type="submit" value="Submit" />
+  </p>
+</form>
+
+<form action="http://localhost:8080/orderservice/api/order/cancelOrder" method="POST">
+  <legend>Cancel order</legend>
+  <p>
+    <label for="id">Id</label>
+    <input type="text" id="id" name="orderId" value="1" />
+  </p>
+  <p>
+    <input type="submit" value="Submit" />
+  </p>
+</form>
