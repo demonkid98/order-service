@@ -17,7 +17,8 @@ import vn.com.vndirect.rest.resource.OrderServiceResource;
 
 public class OrderServiceResourceTest {
 
-    private ApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring-test/spring-bean.xml");
+    private ApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring-test/spring-bean.xml",
+            "classpath:spring-test/spring-redis.xml");
     private OrderServiceResource resource;
     private OrderServiceResource inactiveResource;
 
@@ -26,7 +27,6 @@ public class OrderServiceResourceTest {
 
     @Before
     public void setUp() {
-//        orderService = context.getBean("orderServiceProxy", OrderService.class);
         resource = context.getBean("orderServiceResource", OrderServiceResource.class);
         inactiveResource = context.getBean("inactiveOrderServiceResource", OrderServiceResource.class);
     }

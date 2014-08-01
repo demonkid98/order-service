@@ -4,9 +4,13 @@ import static org.junit.Assert.*;
 
 import java.util.Random;
 
+import javax.ws.rs.NotFoundException;
+
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.core.ZSetOperations;
@@ -18,13 +22,18 @@ public class StatisticsServiceResourceTest {
     private ApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring-test/spring-bean.xml",
             "classpath:spring-test/spring-redis.xml");
     private StatisticsServiceResource resource;
+    private StatisticsServiceResource inactiveResource;
     private ZSetOperations<String, String> zSetOps;
     private String redisOrderKeyName;
     private String redisAccKeyName;
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Before
     public void setUp() {
         resource = context.getBean("statisticsServiceResource", StatisticsServiceResource.class);
+        inactiveResource = context.getBean("inactiveStatisticsServiceResource", StatisticsServiceResource.class);
         zSetOps = resource.getTemplate().opsForZSet();
         redisOrderKeyName = resource.getRedisOrderKeyName();
         redisAccKeyName = resource.getRedisAccKeyName();
@@ -39,8 +48,8 @@ public class StatisticsServiceResourceTest {
     @Test
     public void testRedisConnection() {
         assertNotNull(resource);
-        assertEquals("order", redisOrderKeyName);
-        assertEquals("account", redisAccKeyName);
+        assertEquals("test-order", redisOrderKeyName);
+        assertEquals("test-account", redisAccKeyName);
     }
 
     @Test
@@ -75,6 +84,18 @@ public class StatisticsServiceResourceTest {
 
         assertEquals(new Long(10), zSetOps.size(redisOrderKeyName));
         assertTrue(zSetOps.range(redisOrderKeyName, 0, -1).contains(order.getId()));
+    }
+
+    @Test
+    public void testGetOrderStatisticsShouldThrow406IfInactive() {
+        thrown.expect(NotFoundException.class);
+        inactiveResource.getTopOrders();
+    }
+
+    @Test
+    public void testGetAccStatisticsShouldThrow406IfInactive() {
+        thrown.expect(NotFoundException.class);
+        inactiveResource.getTopAccounts();
     }
 
     private void prepareDataSet(int size, double score) {

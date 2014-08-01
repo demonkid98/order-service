@@ -21,10 +21,6 @@ public class OrderServiceResource extends ServiceResource {
 
     public Order placeOrder(String account, String symbol, float price, int volume, String type)
             throws NotFoundException, NotAcceptableException {
-        if (! getAppState().isActive()) {
-            throw new NotFoundException();
-        }
-
         Order order = new Order(account, symbol, price, volume, type);
         Validator validator = new OrderValidator(order, stockService);
 
@@ -38,10 +34,6 @@ public class OrderServiceResource extends ServiceResource {
 
     public String replaceOrder(String orderId, String account, String symbol, float price, int volume, String type)
             throws NotFoundException, NotAcceptableException {
-        if (! getAppState().isActive()) {
-            throw new NotFoundException();
-        }
-
         Order order = new Order(orderId, account, symbol, price, volume, type);
         Validator validator = new OrderValidator(order, stockService);
 
@@ -54,10 +46,6 @@ public class OrderServiceResource extends ServiceResource {
 
     public String cancelOrder(String orderId, String account, String symbol, float price, int volume, String type)
             throws NotFoundException {
-        if (! getAppState().isActive()) {
-            throw new NotFoundException();
-        }
-
         Order order = new Order(orderId, account, symbol, price, volume, type);
         serviceSender.cancelOrder(order);
         return orderId;

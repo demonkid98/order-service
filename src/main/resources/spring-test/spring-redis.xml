@@ -7,5 +7,5 @@
     <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
         p:host-name="${redis.host}" p:port="${redis.port}" />
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
-        p:connection-factory-ref="jedisConnectionFactory"/>
+        p:connection-factory-ref="jedisConnectionFactory" />
 </beans>

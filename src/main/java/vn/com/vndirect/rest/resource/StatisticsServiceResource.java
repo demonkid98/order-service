@@ -61,7 +61,7 @@ public class StatisticsServiceResource extends ServiceResource {
 
     private void addToRedisZSet(String key, String name, double score) {
         template.opsForZSet().add(key, name, score);
-        template.opsForZSet().removeRange(key, 0, - maxKeep - 1); // keep {maxKeep} items with top score
+        template.opsForZSet().removeRange(key, 0, -maxKeep - 1); // keep {maxKeep} items with top score
     }
 
     private List<Map<String, String>> convertToListMap(Set<TypedTuple<String>> set) {
@@ -74,4 +74,5 @@ public class StatisticsServiceResource extends ServiceResource {
         }
         return rs;
     }
+
 }

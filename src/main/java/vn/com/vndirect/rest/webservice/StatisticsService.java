@@ -1,7 +1,11 @@
 package vn.com.vndirect.rest.webservice;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -19,14 +23,26 @@ public class StatisticsService {
     @Path("/topOrders")
     @Produces(MediaType.APPLICATION_JSON)
     public Response topOrders() {
-        return Response.status(Response.Status.OK).entity(resource.getTopOrders()).build();
+        List<Map<String, String>> result;
+        try {
+            result = resource.getTopOrders();
+        } catch (NotFoundException e) {
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        }
+        return Response.status(Response.Status.OK).entity(result).build();
     }
 
     @GET
     @Path("/topAccounts")
     @Produces(MediaType.APPLICATION_JSON)
     public Response topAccounts() {
-        return Response.status(Response.Status.OK).entity(resource.getTopAccounts()).build();
+        List<Map<String, String>> result;
+        try {
+            result = resource.getTopAccounts();
+        } catch (NotFoundException e) {
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        }
+        return Response.status(Response.Status.OK).entity(result).build();
     }
 
 }
