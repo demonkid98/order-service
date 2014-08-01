@@ -21,15 +21,20 @@ at `/orderservice/src/main/resources/config.properties`
 * Start zookeeper on the local machine that listens on port `2181`
 * Start redis as [configured](#config)
 * Run `mvn tomcat:run -Dmaven.tomcat.port=<port>`
+
 Without the `-Dmaven.tomcat.port` parameter, the web app will be binded to port 8080 by default
+
 The web app is then available at `http://localhost:<port>/orderservice/`
 
 * Run several server instances at different ports simultaneously in order to test fail-over mechanism
+* `/orderservice/test.html` could be used to test `POST` order services
 
 #### Services ####
 ##### Place Order #####
 ```POST http://localhost:<port>/orderservice/api/order/placeOrder```
+
 `POST` parameters:
+
 * account: string
 * symbol: string
 * price: float
@@ -38,7 +43,9 @@ The web app is then available at `http://localhost:<port>/orderservice/`
 
 ##### Replace Order #####
 ```POST http://localhost:<port>/orderservice/api/order/replaceOrder```
+
 `POST` parameters:
+
 * id: string
 * account: string
 * symbol: string
@@ -48,7 +55,9 @@ The web app is then available at `http://localhost:<port>/orderservice/`
 
 ##### Cancel Order #####
 ```POST http://localhost:<port>/orderservice/api/order/cancelOrder```
+
 `POST` parameters:
+
 * id: string
 * account: string
 * symbol: string
